@@ -1,0 +1,24 @@
+project: 
+  name: "ai_replenishment_system"
+  version: "1.0.0"
+  random_seed: 42          # Fixed seed for reproducibility across all modules.
+
+paths:
+  data_raw: "data/raw/"                # Directory for raw data files (CSVs).
+  data_processed: "data/processed/"      # Directory for cleaned and processed data.
+  data_splits: "data/splits/"            # Directory for train/validation/test splits.
+  data_synthetic: "data/synthetic/"      # Directory for synthetically generated demand data.
+  model_lstm: "models/lstm/"             # Directory for trained LSTM model weights.
+  model_rl: "models/rl/"                 # Directory for trained RL agent checkpoints.
+  logs: "outputs/logs/"                 # Directory for TensorBoard logs and training logs.
+  plots: "outputs/plots/"               # Directory for generated plot images.
+  results: "outputs/results/"           # Directory for KPI result CSVs and comparison reports.
+
+hardware:
+  use_gpu: true                        # Set to true to use GPU for training, false for CPU 
+  num_workers: 2                        # Number of CPU workers for parallel data loading.
+
+logging:
+  level: "INFO"                        # Logging level: DEBUG, INFO, WARNING.
+  log_to_file: true                    # If true, logs are also written to a file in
+

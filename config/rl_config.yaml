@@ -1,0 +1,43 @@
+environment:
+  initial_inventory: 100
+  max_inventory: 500
+  lead_time: 2
+  episode_length: 30
+  stockout_penalty_per_unit: 10.0
+  holding_cost_per_unit: 0.5
+  ordering_cost_per_unit: 2.0
+  demand_history_length: 30
+  forecast_horizon: 7
+  num_external_numeric: 4
+  num_external_categorical: 0
+
+action_space:
+  type: "discrete"
+  delta_min: -200
+  delta_max: 200
+  delta_step: 25
+
+dqn:
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_min: 0.01
+  epsilon_decay: 0.995
+  replay_buffer_size: 50000
+  batch_size: 64
+  target_update_frequency: 500
+  learning_rate: 0.005
+  total_timesteps: 200000 
+  network:
+    hidden_size: 256
+    num_hidden_layers: 2
+    activation: "relu"
+    dropout: 0.0
+
+baselines:
+  fixed_s:
+    reorder_point: 50
+    order_quantity: 20
+  forecast_basestock:
+    safety_stock: 20
+  standard_rl:
+    uses_forecast: false

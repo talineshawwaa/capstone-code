@@ -1,0 +1,19 @@
+data:
+  sequence_length: 30          # Number of past time steps to use for forecasting.
+  forecast_horizon: 7          # Number of future time steps to predict.
+  train_split: 0.7              # Proportion of data to use for training.
+  val_split: 0.15               # Proportion of data to use for validation.
+
+model:
+  input_size: 1               # Number of features in the input data. 
+  hidden_size: 64              # Number of features in the hidden state of the LSTM.
+  num_layers: 2                # Number of stacked LSTM layers.
+  dropout: 0.2                 # Dropout rate for regularization.
+  output_size: 7              # Number of features in the output (e.g., demand forecast).
+
+training:
+  batch_size: 64               # Number of samples per training batch.
+  epochs: 30               # Maximum number of training epochs
+  early_stopping_patience: 10    # Number of epochs with no improvement after which training will be stopped.
+  checkpoint_every_n_epochs: 10  # Save model checkpoint every N epochs.
+  learning_rate: 0.001         # Learning rate for the optimizer.
