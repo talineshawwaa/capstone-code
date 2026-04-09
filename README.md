@@ -227,7 +227,7 @@ Run scripts from the project root directory.
 ```bash
 python scripts/train_lstm.py
 ```
-
+       
 Loads `data/raw/retail_store_inventory.csv`, preprocesses and engineers features, builds 30→7 sliding-window sequences, trains the LSTM with early stopping, and saves:
 - `models/lstm/best_lstm_model.pt`
 - `models/lstm/scalers/` — per store-product MinMax scaler `.pkl` files
