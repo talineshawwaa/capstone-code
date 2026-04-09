@@ -1,11 +1,11 @@
 environment:
-  initial_inventory: 100
-  max_inventory: 500
-  lead_time: 2
+  initial_inventory: 300
+  max_inventory: 800
+  lead_time: 7
   episode_length: 30
-  stockout_penalty_per_unit: 10.0
-  holding_cost_per_unit: 0.5
-  ordering_cost_per_unit: 2.0
+  stockout_penalty_per_unit: 30.0
+  holding_cost_per_unit: 1.0
+  ordering_cost_per_unit: 1.0
   demand_history_length: 30
   forecast_horizon: 7
   num_external_numeric: 4
@@ -36,8 +36,8 @@ dqn:
 baselines:
   fixed_s:
     reorder_point: 50
-    order_quantity: 20
+    order_quantity: 30
   forecast_basestock:
-    safety_stock: 20
+    safety_stock: 45
   standard_rl:
     uses_forecast: false
