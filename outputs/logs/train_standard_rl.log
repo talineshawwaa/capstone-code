@@ -3936,3 +3936,661 @@
 2026-03-19 00:19:18,254 | INFO | Agent saved to:      models/rl/standard_rl_agent/standard_rl_agent_final.pt
 2026-03-19 00:19:18,254 | INFO | Final avg reward (last 50 episodes): -15326.69
 2026-03-19 00:19:18,274 | INFO | Training history saved to outputs/results/rl_standard_training_history.json
+2026-04-01 22:55:37,464 | INFO | ============================================================
+2026-04-01 22:55:37,464 | INFO | STANDARD RL AGENT TRAINING (NO LSTM FORECAST)
+2026-04-01 22:55:37,465 | INFO | ============================================================
+2026-04-01 22:55:37,465 | INFO | ConfigLoader(
+  project=ai_replenishment_system v1.0.0
+  seed=42
+  lstm_hidden=64, horizon=7
+  rl_lead_time=2, episode=30 days
+)
+2026-04-01 22:55:40,316 | INFO | Loading and preprocessing data...
+2026-04-01 22:55:40,317 | INFO | DataLoader initialised — file: data/raw/retail_store_inventory.csv
+2026-04-01 22:55:40,317 | INFO | Loading raw CSV...
+2026-04-01 22:55:40,375 | INFO |   Loaded 73,100 rows, 15 columns
+2026-04-01 22:55:40,405 | INFO |   Final shape: (73100, 15) | Stores: 5 | Products: 20 | Date range: 2022-01-01 → 2024-01-01
+2026-04-01 22:55:40,443 | INFO | Loaded 100 scalers from models/lstm/scalers
+2026-04-01 22:55:40,443 | INFO | Preprocessor: transform started
+2026-04-01 22:55:40,710 | INFO | Preprocessor: transform complete
+2026-04-01 22:55:40,710 | INFO | FeatureEngineer: building features...
+2026-04-01 22:55:40,754 | INFO |   ✓ Lag features added (lag_1, lag_7)
+2026-04-01 22:55:40,815 | INFO |   ✓ Rolling statistics added (mean_7, std_7)
+2026-04-01 22:55:40,821 | INFO |   ✓ Time features added (day_of_week sin/cos, month sin/cos)
+2026-04-01 22:55:40,837 | INFO |   ✓ Categorical encoding: 17 columns created
+2026-04-01 22:55:40,844 | INFO |   ✓ Dropped 700 NaN rows (from lag/rolling at series start)
+2026-04-01 22:55:40,844 | INFO | FeatureEngineer: complete. Shape: (72400, 38) | Numeric features: 12 | Categorical features: 17
+2026-04-01 22:55:40,851 | INFO | Found 100 unique store-product pairs.
+2026-04-01 22:55:40,851 | INFO | Training on: S001 / P0001
+2026-04-01 22:55:40,856 | INFO | Building inventory environment...
+2026-04-01 22:55:40,856 | INFO | DemandSimulator: mode=replay, mean=137.86, std=108.39, n_days=724
+2026-04-01 22:55:40,856 | INFO | ActionSpace: 17 actions, deltas from -200 to 200 in steps of 25, lead time 2 days, max inventory 500
+2026-04-01 22:55:40,856 | INFO | StateSpace: dim45[inventory(2) + pipeline(2)] +[history(30)] +[forecast(7)] +[numeric(4)] +[categorical(0)]
+2026-04-01 22:55:40,856 | INFO | InventoryEnv Created |obs_dim=45 | n_actions=17 | use_forecast=False
+2026-04-01 22:55:40,856 | INFO | Building DQN agent...
+2026-04-01 22:55:40,894 | INFO | QNetwork: state_dim=45 → [256×2] → n_actions=17 | params=81,937
+2026-04-01 22:55:41,023 | INFO | QNetwork: state_dim=45 → [256×2] → n_actions=17 | params=81,937
+2026-04-01 22:55:42,246 | INFO | ReplayBuffer: capacity=50,000, state_dim=45, memory≈18.0MB
+2026-04-01 22:55:42,246 | INFO | DQNAgent: state_dim=45, n_actions=17, device=cuda, gamma=0.99, epsilon=1.0→0.01
+2026-04-01 22:55:42,247 | INFO | Starting training for 200,000 timesteps...
+2026-04-01 22:55:44,502 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,502 | INFO | New best avg reward: -18741.97 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,669 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,670 | INFO | New best avg reward: -18739.21 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,714 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,714 | INFO | New best avg reward: -18719.76 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,765 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,765 | INFO | New best avg reward: -18707.86 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,810 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,810 | INFO | New best avg reward: -18688.47 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,856 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,856 | INFO | New best avg reward: -18666.05 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,902 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,902 | INFO | New best avg reward: -18629.59 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,946 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,946 | INFO | New best avg reward: -18590.32 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,990 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:44,990 | INFO | New best avg reward: -18529.00 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,034 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,034 | INFO | New best avg reward: -18500.91 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,077 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,077 | INFO | New best avg reward: -18460.13 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,120 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,120 | INFO | New best avg reward: -18410.98 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,164 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,164 | INFO | New best avg reward: -18392.66 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,207 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,207 | INFO | New best avg reward: -18334.00 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,250 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,250 | INFO | New best avg reward: -18273.03 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,293 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,293 | INFO | New best avg reward: -18223.85 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,337 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,337 | INFO | New best avg reward: -18193.85 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,380 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,380 | INFO | New best avg reward: -18144.91 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,423 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,423 | INFO | New best avg reward: -18115.57 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,466 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,466 | INFO | New best avg reward: -18068.60 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,509 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,509 | INFO | New best avg reward: -18022.68 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,553 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,553 | INFO | New best avg reward: -17968.65 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,601 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,601 | INFO | New best avg reward: -17911.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,645 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,645 | INFO | New best avg reward: -17859.09 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,688 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,688 | INFO | New best avg reward: -17802.84 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,731 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,731 | INFO | New best avg reward: -17745.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,775 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,775 | INFO | New best avg reward: -17690.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,819 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,819 | INFO | New best avg reward: -17637.10 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,864 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,864 | INFO | New best avg reward: -17588.73 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,913 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,913 | INFO | New best avg reward: -17533.22 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,960 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:45,960 | INFO | New best avg reward: -17474.34 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,005 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,005 | INFO | New best avg reward: -17431.54 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,049 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,049 | INFO | New best avg reward: -17383.40 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,093 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,093 | INFO | New best avg reward: -17330.12 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,136 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,136 | INFO | New best avg reward: -17288.31 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,179 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,179 | INFO | New best avg reward: -17230.88 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,222 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,223 | INFO | New best avg reward: -17167.19 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,266 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,266 | INFO | New best avg reward: -17114.57 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,310 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,310 | INFO | New best avg reward: -17056.03 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,354 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,354 | INFO | New best avg reward: -17000.67 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,397 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,397 | INFO | New best avg reward: -16943.52 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,440 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,440 | INFO | New best avg reward: -16884.85 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,483 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,483 | INFO | New best avg reward: -16823.62 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,527 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,527 | INFO | New best avg reward: -16753.51 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,570 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,571 | INFO | New best avg reward: -16691.35 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,614 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,614 | INFO | New best avg reward: -16645.29 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,659 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,659 | INFO | New best avg reward: -16600.30 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,699 | INFO | Episode   100 | Avg Reward (last 50): -16559.38 | Avg Length: 30 | Total Steps: 3,000, epsilon=0.0100
+2026-04-01 22:55:46,704 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,704 | INFO | New best avg reward: -16559.38 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,752 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,752 | INFO | New best avg reward: -16530.78 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,797 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,797 | INFO | New best avg reward: -16498.08 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,843 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,843 | INFO | New best avg reward: -16477.72 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,890 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:46,890 | INFO | New best avg reward: -16471.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,056 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,057 | INFO | New best avg reward: -16464.58 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,102 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,102 | INFO | New best avg reward: -16448.51 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,269 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:47,269 | INFO | New best avg reward: -16441.74 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,556 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,557 | INFO | New best avg reward: -16441.14 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,603 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,603 | INFO | New best avg reward: -16428.40 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,649 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,649 | INFO | New best avg reward: -16421.39 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,696 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,696 | INFO | New best avg reward: -16407.66 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,741 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,741 | INFO | New best avg reward: -16405.81 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,787 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,787 | INFO | New best avg reward: -16382.29 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,832 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,832 | INFO | New best avg reward: -16354.01 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,878 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,878 | INFO | New best avg reward: -16336.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,965 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:49,965 | INFO | New best avg reward: -16310.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,011 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,011 | INFO | New best avg reward: -16288.43 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,058 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,058 | INFO | New best avg reward: -16279.67 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,104 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,104 | INFO | New best avg reward: -16274.96 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,190 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,190 | INFO | New best avg reward: -16259.24 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,238 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,238 | INFO | New best avg reward: -16258.29 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:50,885 | INFO | Episode   200 | Avg Reward (last 50): -16310.77 | Avg Length: 30 | Total Steps: 6,000, epsilon=0.0100
+2026-04-01 22:55:52,190 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,190 | INFO | New best avg reward: -16237.90 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,277 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,277 | INFO | New best avg reward: -16236.70 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,404 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,404 | INFO | New best avg reward: -16227.58 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,450 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,450 | INFO | New best avg reward: -16221.06 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,496 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,496 | INFO | New best avg reward: -16203.88 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,542 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:52,542 | INFO | New best avg reward: -16195.74 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,327 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,327 | INFO | New best avg reward: -16189.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,373 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,373 | INFO | New best avg reward: -16183.16 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,418 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,418 | INFO | New best avg reward: -16180.86 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,508 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,508 | INFO | New best avg reward: -16179.86 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,555 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,555 | INFO | New best avg reward: -16171.73 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,602 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,602 | INFO | New best avg reward: -16155.36 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,648 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,648 | INFO | New best avg reward: -16138.25 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,695 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:53,695 | INFO | New best avg reward: -16124.48 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:54,805 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:54,805 | INFO | New best avg reward: -16112.42 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,051 | INFO | Episode   300 | Avg Reward (last 50): -16104.01 | Avg Length: 30 | Total Steps: 9,000, epsilon=0.0100
+2026-04-01 22:55:55,056 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,056 | INFO | New best avg reward: -16104.01 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,102 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,102 | INFO | New best avg reward: -16101.71 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,148 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,148 | INFO | New best avg reward: -16098.60 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,195 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,195 | INFO | New best avg reward: -16094.38 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,487 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,487 | INFO | New best avg reward: -16087.08 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,823 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,823 | INFO | New best avg reward: -16082.53 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,871 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,871 | INFO | New best avg reward: -16077.57 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,916 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,916 | INFO | New best avg reward: -16075.79 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,962 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:55,962 | INFO | New best avg reward: -16060.99 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,011 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,011 | INFO | New best avg reward: -16058.40 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,220 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,221 | INFO | New best avg reward: -16048.07 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,266 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,266 | INFO | New best avg reward: -16045.84 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,475 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,475 | INFO | New best avg reward: -16039.77 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,561 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,561 | INFO | New best avg reward: -16028.55 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,772 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,772 | INFO | New best avg reward: -16024.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,817 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,817 | INFO | New best avg reward: -16024.56 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,862 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,863 | INFO | New best avg reward: -16015.18 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,909 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,909 | INFO | New best avg reward: -16006.53 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,961 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:56,961 | INFO | New best avg reward: -15998.43 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:57,088 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:57,088 | INFO | New best avg reward: -15982.57 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:57,133 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:57,133 | INFO | New best avg reward: -15976.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:59,426 | INFO | Episode   400 | Avg Reward (last 50): -16097.17 | Avg Length: 30 | Total Steps: 12,000, epsilon=0.0100
+2026-04-01 22:55:59,945 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:55:59,945 | INFO | New best avg reward: -15965.69 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,000 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,000 | INFO | New best avg reward: -15954.51 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,055 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,055 | INFO | New best avg reward: -15947.59 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,154 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,154 | INFO | New best avg reward: -15931.49 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,205 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,206 | INFO | New best avg reward: -15923.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,258 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,258 | INFO | New best avg reward: -15913.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,313 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,313 | INFO | New best avg reward: -15900.17 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,365 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,366 | INFO | New best avg reward: -15893.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,418 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,418 | INFO | New best avg reward: -15875.69 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,563 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,563 | INFO | New best avg reward: -15866.98 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,614 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,614 | INFO | New best avg reward: -15848.37 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,666 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:00,666 | INFO | New best avg reward: -15847.62 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:01,045 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:01,045 | INFO | New best avg reward: -15831.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:01,097 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:01,097 | INFO | New best avg reward: -15825.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:04,164 | INFO | Episode   500 | Avg Reward (last 50): -15938.44 | Avg Length: 30 | Total Steps: 15,000, epsilon=0.0100
+2026-04-01 22:56:04,186 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep500.pt
+2026-04-01 22:56:05,646 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,646 | INFO | New best avg reward: -15822.12 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,699 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,699 | INFO | New best avg reward: -15821.69 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,756 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,756 | INFO | New best avg reward: -15805.65 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,808 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,808 | INFO | New best avg reward: -15803.95 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,861 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,861 | INFO | New best avg reward: -15803.49 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,913 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,913 | INFO | New best avg reward: -15800.45 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,965 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:05,965 | INFO | New best avg reward: -15795.23 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:06,017 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:06,017 | INFO | New best avg reward: -15793.60 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:06,070 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:06,070 | INFO | New best avg reward: -15791.00 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,247 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,247 | INFO | New best avg reward: -15789.50 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,293 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,293 | INFO | New best avg reward: -15772.40 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,503 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,504 | INFO | New best avg reward: -15769.49 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,550 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,550 | INFO | New best avg reward: -15768.25 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,599 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,599 | INFO | New best avg reward: -15760.29 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,641 | INFO | Episode   600 | Avg Reward (last 50): -15756.02 | Avg Length: 30 | Total Steps: 18,000, epsilon=0.0100
+2026-04-01 22:56:08,646 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,646 | INFO | New best avg reward: -15756.02 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,692 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,692 | INFO | New best avg reward: -15754.18 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,738 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,738 | INFO | New best avg reward: -15752.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,784 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:08,784 | INFO | New best avg reward: -15744.58 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:10,057 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:10,057 | INFO | New best avg reward: -15743.46 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,079 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,079 | INFO | New best avg reward: -15740.93 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,126 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,126 | INFO | New best avg reward: -15728.83 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,381 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,381 | INFO | New best avg reward: -15727.10 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,428 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:11,428 | INFO | New best avg reward: -15726.49 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:12,769 | INFO | Episode   700 | Avg Reward (last 50): -15868.68 | Avg Length: 30 | Total Steps: 21,000, epsilon=0.0100
+2026-04-01 22:56:14,610 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,610 | INFO | New best avg reward: -15714.21 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,656 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,656 | INFO | New best avg reward: -15705.18 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,743 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,743 | INFO | New best avg reward: -15700.23 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,830 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,830 | INFO | New best avg reward: -15691.90 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,875 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:14,875 | INFO | New best avg reward: -15689.92 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,046 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,046 | INFO | New best avg reward: -15689.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,093 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,093 | INFO | New best avg reward: -15687.03 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,179 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,179 | INFO | New best avg reward: -15685.72 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,632 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,632 | INFO | New best avg reward: -15679.94 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,720 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,720 | INFO | New best avg reward: -15672.00 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,807 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,807 | INFO | New best avg reward: -15669.09 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,852 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:15,852 | INFO | New best avg reward: -15667.72 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:16,912 | INFO | Episode   800 | Avg Reward (last 50): -15764.33 | Avg Length: 30 | Total Steps: 24,000, epsilon=0.0100
+2026-04-01 22:56:20,324 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:20,324 | INFO | New best avg reward: -15656.16 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:20,374 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:20,374 | INFO | New best avg reward: -15655.44 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:20,987 | INFO | Episode   900 | Avg Reward (last 50): -15702.59 | Avg Length: 30 | Total Steps: 27,000, epsilon=0.0100
+2026-04-01 22:56:25,066 | INFO | Episode  1000 | Avg Reward (last 50): -15737.78 | Avg Length: 30 | Total Steps: 30,000, epsilon=0.0100
+2026-04-01 22:56:25,082 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep1000.pt
+2026-04-01 22:56:28,484 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:28,485 | INFO | New best avg reward: -15653.44 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:29,180 | INFO | Episode  1100 | Avg Reward (last 50): -15665.59 | Avg Length: 30 | Total Steps: 33,000, epsilon=0.0100
+2026-04-01 22:56:29,389 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:29,389 | INFO | New best avg reward: -15650.85 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:29,434 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:29,434 | INFO | New best avg reward: -15648.05 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:33,314 | INFO | Episode  1200 | Avg Reward (last 50): -15688.81 | Avg Length: 30 | Total Steps: 36,000, epsilon=0.0100
+2026-04-01 22:56:37,427 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,427 | INFO | New best avg reward: -15642.10 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,513 | INFO | Episode  1300 | Avg Reward (last 50): -15643.16 | Avg Length: 30 | Total Steps: 39,000, epsilon=0.0100
+2026-04-01 22:56:37,561 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,561 | INFO | New best avg reward: -15640.63 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,698 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,698 | INFO | New best avg reward: -15636.50 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,788 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,788 | INFO | New best avg reward: -15634.48 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,835 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,835 | INFO | New best avg reward: -15628.16 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,886 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,886 | INFO | New best avg reward: -15623.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,976 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:37,976 | INFO | New best avg reward: -15622.71 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,066 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,066 | INFO | New best avg reward: -15618.80 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,116 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,116 | INFO | New best avg reward: -15612.42 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,334 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,334 | INFO | New best avg reward: -15608.99 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,381 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,381 | INFO | New best avg reward: -15603.25 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,428 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,428 | INFO | New best avg reward: -15601.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,475 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,475 | INFO | New best avg reward: -15601.22 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,861 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,861 | INFO | New best avg reward: -15599.80 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,908 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,908 | INFO | New best avg reward: -15599.47 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,957 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:38,957 | INFO | New best avg reward: -15598.98 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:39,003 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:39,003 | INFO | New best avg reward: -15596.52 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:39,051 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:39,051 | INFO | New best avg reward: -15594.30 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:41,834 | INFO | Episode  1400 | Avg Reward (last 50): -15627.49 | Avg Length: 30 | Total Steps: 42,000, epsilon=0.0100
+2026-04-01 22:56:42,662 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:42,663 | INFO | New best avg reward: -15591.04 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:42,712 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:42,712 | INFO | New best avg reward: -15588.71 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,169 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,169 | INFO | New best avg reward: -15587.32 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,543 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,543 | INFO | New best avg reward: -15579.17 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,589 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,589 | INFO | New best avg reward: -15578.84 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,636 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,636 | INFO | New best avg reward: -15577.47 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,683 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,683 | INFO | New best avg reward: -15575.14 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,730 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,730 | INFO | New best avg reward: -15573.24 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,775 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,775 | INFO | New best avg reward: -15567.77 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,862 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:43,862 | INFO | New best avg reward: -15567.70 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:45,993 | INFO | Episode  1500 | Avg Reward (last 50): -15580.62 | Avg Length: 30 | Total Steps: 45,000, epsilon=0.0100
+2026-04-01 22:56:46,011 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep1500.pt
+2026-04-01 22:56:46,386 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,387 | INFO | New best avg reward: -15566.86 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,433 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,433 | INFO | New best avg reward: -15561.37 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,483 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,483 | INFO | New best avg reward: -15560.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,529 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,529 | INFO | New best avg reward: -15555.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,577 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,577 | INFO | New best avg reward: -15543.65 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,623 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,623 | INFO | New best avg reward: -15541.88 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,669 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,669 | INFO | New best avg reward: -15535.21 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,759 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,759 | INFO | New best avg reward: -15534.97 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,846 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,846 | INFO | New best avg reward: -15533.07 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,893 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,893 | INFO | New best avg reward: -15532.92 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,939 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:46,939 | INFO | New best avg reward: -15532.81 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:48,959 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:48,959 | INFO | New best avg reward: -15531.87 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,043 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,043 | INFO | New best avg reward: -15528.72 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,126 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,127 | INFO | New best avg reward: -15528.29 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,461 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,461 | INFO | New best avg reward: -15528.10 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,549 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,549 | INFO | New best avg reward: -15525.22 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,679 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,679 | INFO | New best avg reward: -15520.99 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,725 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,725 | INFO | New best avg reward: -15519.18 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,771 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:49,771 | INFO | New best avg reward: -15518.89 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:50,142 | INFO | Episode  1600 | Avg Reward (last 50): -15520.86 | Avg Length: 30 | Total Steps: 48,000, epsilon=0.0100
+2026-04-01 22:56:50,230 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:50,230 | INFO | New best avg reward: -15518.61 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:50,275 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:50,275 | INFO | New best avg reward: -15515.71 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:56:54,269 | INFO | Episode  1700 | Avg Reward (last 50): -15516.67 | Avg Length: 30 | Total Steps: 51,000, epsilon=0.0100
+2026-04-01 22:56:58,471 | INFO | Episode  1800 | Avg Reward (last 50): -15581.17 | Avg Length: 30 | Total Steps: 54,000, epsilon=0.0100
+2026-04-01 22:57:02,640 | INFO | Episode  1900 | Avg Reward (last 50): -15565.42 | Avg Length: 30 | Total Steps: 57,000, epsilon=0.0100
+2026-04-01 22:57:06,742 | INFO | Episode  2000 | Avg Reward (last 50): -15571.36 | Avg Length: 30 | Total Steps: 60,000, epsilon=0.0100
+2026-04-01 22:57:06,773 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep2000.pt
+2026-04-01 22:57:09,134 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,134 | INFO | New best avg reward: -15507.77 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,181 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,181 | INFO | New best avg reward: -15503.98 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,230 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,230 | INFO | New best avg reward: -15503.31 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,400 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,400 | INFO | New best avg reward: -15502.24 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,446 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,446 | INFO | New best avg reward: -15499.76 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,493 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,493 | INFO | New best avg reward: -15494.22 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,541 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,541 | INFO | New best avg reward: -15491.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,629 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,629 | INFO | New best avg reward: -15490.06 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,800 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:09,800 | INFO | New best avg reward: -15487.19 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,381 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,381 | INFO | New best avg reward: -15482.01 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,551 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,551 | INFO | New best avg reward: -15475.93 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,597 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,597 | INFO | New best avg reward: -15474.01 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:10,968 | INFO | Episode  2100 | Avg Reward (last 50): -15483.85 | Avg Length: 30 | Total Steps: 63,000, epsilon=0.0100
+2026-04-01 22:57:15,100 | INFO | Episode  2200 | Avg Reward (last 50): -15542.91 | Avg Length: 30 | Total Steps: 66,000, epsilon=0.0100
+2026-04-01 22:57:19,217 | INFO | Episode  2300 | Avg Reward (last 50): -15499.48 | Avg Length: 30 | Total Steps: 69,000, epsilon=0.0100
+2026-04-01 22:57:23,330 | INFO | Episode  2400 | Avg Reward (last 50): -15628.63 | Avg Length: 30 | Total Steps: 72,000, epsilon=0.0100
+2026-04-01 22:57:27,486 | INFO | Episode  2500 | Avg Reward (last 50): -15587.11 | Avg Length: 30 | Total Steps: 75,000, epsilon=0.0100
+2026-04-01 22:57:27,517 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep2500.pt
+2026-04-01 22:57:31,774 | INFO | Episode  2600 | Avg Reward (last 50): -15576.91 | Avg Length: 30 | Total Steps: 78,000, epsilon=0.0100
+2026-04-01 22:57:36,003 | INFO | Episode  2700 | Avg Reward (last 50): -15548.77 | Avg Length: 30 | Total Steps: 81,000, epsilon=0.0100
+2026-04-01 22:57:40,153 | INFO | Episode  2800 | Avg Reward (last 50): -15579.60 | Avg Length: 30 | Total Steps: 84,000, epsilon=0.0100
+2026-04-01 22:57:44,275 | INFO | Episode  2900 | Avg Reward (last 50): -15549.63 | Avg Length: 30 | Total Steps: 87,000, epsilon=0.0100
+2026-04-01 22:57:48,392 | INFO | Episode  3000 | Avg Reward (last 50): -15524.81 | Avg Length: 30 | Total Steps: 90,000, epsilon=0.0100
+2026-04-01 22:57:48,416 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep3000.pt
+2026-04-01 22:57:52,545 | INFO | Episode  3100 | Avg Reward (last 50): -15499.55 | Avg Length: 30 | Total Steps: 93,000, epsilon=0.0100
+2026-04-01 22:57:53,700 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,700 | INFO | New best avg reward: -15472.71 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,790 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,790 | INFO | New best avg reward: -15471.79 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,885 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,885 | INFO | New best avg reward: -15466.80 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,933 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:53,933 | INFO | New best avg reward: -15463.01 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,021 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,021 | INFO | New best avg reward: -15459.63 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,068 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,068 | INFO | New best avg reward: -15452.13 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,202 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,202 | INFO | New best avg reward: -15451.38 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,249 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,249 | INFO | New best avg reward: -15447.40 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,296 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,296 | INFO | New best avg reward: -15446.79 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,343 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,343 | INFO | New best avg reward: -15443.95 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,390 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:54,390 | INFO | New best avg reward: -15439.55 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:57:56,837 | INFO | Episode  3200 | Avg Reward (last 50): -15523.17 | Avg Length: 30 | Total Steps: 96,000, epsilon=0.0100
+2026-04-01 22:58:01,035 | INFO | Episode  3300 | Avg Reward (last 50): -15580.18 | Avg Length: 30 | Total Steps: 99,000, epsilon=0.0100
+2026-04-01 22:58:05,194 | INFO | Episode  3400 | Avg Reward (last 50): -15581.43 | Avg Length: 30 | Total Steps: 102,000, epsilon=0.0100
+2026-04-01 22:58:09,366 | INFO | Episode  3500 | Avg Reward (last 50): -15487.84 | Avg Length: 30 | Total Steps: 105,000, epsilon=0.0100
+2026-04-01 22:58:09,392 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep3500.pt
+2026-04-01 22:58:13,504 | INFO | Episode  3600 | Avg Reward (last 50): -15526.11 | Avg Length: 30 | Total Steps: 108,000, epsilon=0.0100
+2026-04-01 22:58:17,620 | INFO | Episode  3700 | Avg Reward (last 50): -15505.81 | Avg Length: 30 | Total Steps: 111,000, epsilon=0.0100
+2026-04-01 22:58:21,870 | INFO | Episode  3800 | Avg Reward (last 50): -15567.21 | Avg Length: 30 | Total Steps: 114,000, epsilon=0.0100
+2026-04-01 22:58:26,122 | INFO | Episode  3900 | Avg Reward (last 50): -15518.47 | Avg Length: 30 | Total Steps: 117,000, epsilon=0.0100
+2026-04-01 22:58:30,328 | INFO | Episode  4000 | Avg Reward (last 50): -15566.31 | Avg Length: 30 | Total Steps: 120,000, epsilon=0.0100
+2026-04-01 22:58:30,379 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep4000.pt
+2026-04-01 22:58:34,501 | INFO | Episode  4100 | Avg Reward (last 50): -15503.62 | Avg Length: 30 | Total Steps: 123,000, epsilon=0.0100
+2026-04-01 22:58:38,596 | INFO | Episode  4200 | Avg Reward (last 50): -15510.00 | Avg Length: 30 | Total Steps: 126,000, epsilon=0.0100
+2026-04-01 22:58:42,725 | INFO | Episode  4300 | Avg Reward (last 50): -15458.46 | Avg Length: 30 | Total Steps: 129,000, epsilon=0.0100
+2026-04-01 22:58:46,838 | INFO | Episode  4400 | Avg Reward (last 50): -15452.41 | Avg Length: 30 | Total Steps: 132,000, epsilon=0.0100
+2026-04-01 22:58:51,795 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:51,796 | INFO | New best avg reward: -15437.25 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:51,855 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:51,855 | INFO | New best avg reward: -15433.24 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:51,899 | INFO | Episode  4500 | Avg Reward (last 50): -15433.40 | Avg Length: 30 | Total Steps: 135,000, epsilon=0.0100
+2026-04-01 22:58:51,915 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep4500.pt
+2026-04-01 22:58:51,962 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:51,962 | INFO | New best avg reward: -15430.50 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,010 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,010 | INFO | New best avg reward: -15429.81 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,259 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,259 | INFO | New best avg reward: -15427.94 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,384 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:52,384 | INFO | New best avg reward: -15426.70 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,485 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,485 | INFO | New best avg reward: -15423.84 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,531 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,531 | INFO | New best avg reward: -15421.78 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,742 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:55,742 | INFO | New best avg reward: -15416.62 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:58:56,031 | INFO | Episode  4600 | Avg Reward (last 50): -15431.47 | Avg Length: 30 | Total Steps: 138,000, epsilon=0.0100
+2026-04-01 22:59:00,196 | INFO | Episode  4700 | Avg Reward (last 50): -15523.97 | Avg Length: 30 | Total Steps: 141,000, epsilon=0.0100
+2026-04-01 22:59:04,395 | INFO | Episode  4800 | Avg Reward (last 50): -15444.66 | Avg Length: 30 | Total Steps: 144,000, epsilon=0.0100
+2026-04-01 22:59:05,261 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:05,261 | INFO | New best avg reward: -15415.22 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:05,469 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:05,470 | INFO | New best avg reward: -15413.14 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,250 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,250 | INFO | New best avg reward: -15411.65 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,296 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,296 | INFO | New best avg reward: -15408.80 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,505 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,505 | INFO | New best avg reward: -15407.52 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,592 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:06,592 | INFO | New best avg reward: -15405.42 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:07,572 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:07,572 | INFO | New best avg reward: -15394.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:07,661 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:07,661 | INFO | New best avg reward: -15393.55 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:08,513 | INFO | Episode  4900 | Avg Reward (last 50): -15432.52 | Avg Length: 30 | Total Steps: 147,000, epsilon=0.0100
+2026-04-01 22:59:12,599 | INFO | Episode  5000 | Avg Reward (last 50): -15422.74 | Avg Length: 30 | Total Steps: 150,000, epsilon=0.0100
+2026-04-01 22:59:12,622 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep5000.pt
+2026-04-01 22:59:15,719 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:15,719 | INFO | New best avg reward: -15392.96 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,292 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,293 | INFO | New best avg reward: -15392.75 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,338 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,338 | INFO | New best avg reward: -15390.93 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,385 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,385 | INFO | New best avg reward: -15384.18 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,433 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,433 | INFO | New best avg reward: -15383.28 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,480 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,480 | INFO | New best avg reward: -15382.79 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,569 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,569 | INFO | New best avg reward: -15379.78 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,617 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,617 | INFO | New best avg reward: -15376.23 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,665 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,665 | INFO | New best avg reward: -15373.79 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,712 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,712 | INFO | New best avg reward: -15371.83 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,755 | INFO | Episode  5100 | Avg Reward (last 50): -15371.77 | Avg Length: 30 | Total Steps: 153,000, epsilon=0.0100
+2026-04-01 22:59:16,760 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,760 | INFO | New best avg reward: -15371.77 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,849 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,849 | INFO | New best avg reward: -15371.41 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,897 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:16,897 | INFO | New best avg reward: -15369.42 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 22:59:20,947 | INFO | Episode  5200 | Avg Reward (last 50): -15474.63 | Avg Length: 30 | Total Steps: 156,000, epsilon=0.0100
+2026-04-01 22:59:25,022 | INFO | Episode  5300 | Avg Reward (last 50): -15425.69 | Avg Length: 30 | Total Steps: 159,000, epsilon=0.0100
+2026-04-01 22:59:29,094 | INFO | Episode  5400 | Avg Reward (last 50): -15447.53 | Avg Length: 30 | Total Steps: 162,000, epsilon=0.0100
+2026-04-01 22:59:33,203 | INFO | Episode  5500 | Avg Reward (last 50): -15419.03 | Avg Length: 30 | Total Steps: 165,000, epsilon=0.0100
+2026-04-01 22:59:33,244 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep5500.pt
+2026-04-01 22:59:37,389 | INFO | Episode  5600 | Avg Reward (last 50): -15412.60 | Avg Length: 30 | Total Steps: 168,000, epsilon=0.0100
+2026-04-01 22:59:41,531 | INFO | Episode  5700 | Avg Reward (last 50): -15444.87 | Avg Length: 30 | Total Steps: 171,000, epsilon=0.0100
+2026-04-01 22:59:45,688 | INFO | Episode  5800 | Avg Reward (last 50): -15450.32 | Avg Length: 30 | Total Steps: 174,000, epsilon=0.0100
+2026-04-01 22:59:49,833 | INFO | Episode  5900 | Avg Reward (last 50): -15417.16 | Avg Length: 30 | Total Steps: 177,000, epsilon=0.0100
+2026-04-01 22:59:53,916 | INFO | Episode  6000 | Avg Reward (last 50): -15437.06 | Avg Length: 30 | Total Steps: 180,000, epsilon=0.0100
+2026-04-01 22:59:53,934 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep6000.pt
+2026-04-01 22:59:57,930 | INFO | Episode  6100 | Avg Reward (last 50): -15442.41 | Avg Length: 30 | Total Steps: 183,000, epsilon=0.0100
+2026-04-01 23:00:02,114 | INFO | Episode  6200 | Avg Reward (last 50): -15431.20 | Avg Length: 30 | Total Steps: 186,000, epsilon=0.0100
+2026-04-01 23:00:06,280 | INFO | Episode  6300 | Avg Reward (last 50): -15436.83 | Avg Length: 30 | Total Steps: 189,000, epsilon=0.0100
+2026-04-01 23:00:10,362 | INFO | Episode  6400 | Avg Reward (last 50): -15473.25 | Avg Length: 30 | Total Steps: 192,000, epsilon=0.0100
+2026-04-01 23:00:14,424 | INFO | Episode  6500 | Avg Reward (last 50): -15402.75 | Avg Length: 30 | Total Steps: 195,000, epsilon=0.0100
+2026-04-01 23:00:14,445 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_ep6500.pt
+2026-04-01 23:00:18,533 | INFO | Episode  6600 | Avg Reward (last 50): -15410.65 | Avg Length: 30 | Total Steps: 198,000, epsilon=0.0100
+2026-04-01 23:00:19,598 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,598 | INFO | New best avg reward: -15366.77 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,647 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,647 | INFO | New best avg reward: -15364.37 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,693 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,693 | INFO | New best avg reward: -15363.16 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,738 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:19,738 | INFO | New best avg reward: -15362.94 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:21,294 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:21,294 | INFO | New best avg reward: -15326.69 → saved to models/rl/standard_rl_agent/standard_rl_agent_best.pt
+2026-04-01 23:00:21,322 | INFO | DQNAgent saved to models/rl/standard_rl_agent/standard_rl_agent_final.pt
+2026-04-01 23:00:21,322 | INFO | Training complete. Final agent saved to models/rl/standard_rl_agent/standard_rl_agent_final.pt
+2026-04-01 23:00:21,332 | INFO | Training history saved to outputs/results/rl_lstm_training_history.json
+2026-04-01 23:00:21,332 | INFO | 
+--- Training Complete ---
+2026-04-01 23:00:21,332 | INFO | Episodes completed:  6667
+2026-04-01 23:00:21,332 | INFO | Total steps:         200,000
+2026-04-01 23:00:21,332 | INFO | Agent saved to:      models/rl/standard_rl_agent/standard_rl_agent_final.pt
+2026-04-01 23:00:21,332 | INFO | Final avg reward (last 50 episodes): -15326.69
+2026-04-01 23:00:21,357 | INFO | Training history saved to outputs/results/rl_standard_training_history.json

@@ -1,0 +1,605 @@
+2026-03-28 20:03:11,706 | INFO | ============================================================
+2026-03-28 20:03:11,706 | INFO | TFT + RL AGENT TRAINING
+2026-03-28 20:03:11,706 | INFO | ============================================================
+2026-03-28 20:05:51,727 | INFO | ============================================================
+2026-03-28 20:05:51,727 | INFO | TFT + RL AGENT TRAINING
+2026-03-28 20:05:51,727 | INFO | ============================================================
+2026-03-28 20:07:38,683 | INFO | ============================================================
+2026-03-28 20:07:38,683 | INFO | TFT + RL AGENT TRAINING
+2026-03-28 20:07:38,683 | INFO | ============================================================
+2026-03-28 20:11:00,701 | INFO | ============================================================
+2026-03-28 20:11:00,701 | INFO | TFT + RL AGENT TRAINING
+2026-03-28 20:11:00,701 | INFO | ============================================================
+2026-03-28 20:11:02,618 | INFO | Loading and preprocessing data...
+2026-03-28 20:11:02,619 | INFO | DataLoader initialised — file: data/raw/retail_store_inventory.csv
+2026-03-28 20:11:02,619 | INFO | Loading raw CSV...
+2026-03-28 20:11:02,666 | INFO |   Loaded 73,100 rows, 15 columns
+2026-03-28 20:11:02,689 | INFO |   Final shape: (73100, 15) | Stores: 5 | Products: 20 | Date range: 2022-01-01 → 2024-01-01
+2026-03-28 20:11:02,736 | INFO | Loaded 100 scalers from models/lstm/scalers
+2026-03-28 20:11:02,736 | INFO | Preprocessor: transform started
+2026-03-28 20:11:02,987 | INFO | Preprocessor: transform complete
+2026-03-28 20:11:02,988 | INFO | FeatureEngineer: building features...
+2026-03-28 20:11:03,029 | INFO |   ✓ Lag features added (lag_1, lag_7)
+2026-03-28 20:11:03,087 | INFO |   ✓ Rolling statistics added (mean_7, std_7)
+2026-03-28 20:11:03,093 | INFO |   ✓ Time features added (day_of_week sin/cos, month sin/cos)
+2026-03-28 20:11:03,107 | INFO |   ✓ Categorical encoding: 17 columns created
+2026-03-28 20:11:03,113 | INFO |   ✓ Dropped 700 NaN rows (from lag/rolling at series start)
+2026-03-28 20:11:03,113 | INFO | FeatureEngineer: complete. Shape: (72400, 38) | Numeric features: 12 | Categorical features: 17
+2026-03-28 20:11:03,119 | INFO | Found 100 unique store-product pairs.
+2026-03-28 20:11:03,119 | INFO | Training on: S001 / P0001
+2026-03-28 20:11:03,123 | INFO | Loading TFT predictor...
+2026-03-28 20:14:09,710 | INFO | ============================================================
+2026-03-28 20:14:09,710 | INFO | TFT + RL AGENT TRAINING
+2026-03-28 20:14:09,710 | INFO | ============================================================
+2026-03-28 20:14:11,505 | INFO | Loading and preprocessing data...
+2026-03-28 20:14:11,506 | INFO | DataLoader initialised — file: data/raw/retail_store_inventory.csv
+2026-03-28 20:14:11,506 | INFO | Loading raw CSV...
+2026-03-28 20:14:11,554 | INFO |   Loaded 73,100 rows, 15 columns
+2026-03-28 20:14:11,577 | INFO |   Final shape: (73100, 15) | Stores: 5 | Products: 20 | Date range: 2022-01-01 → 2024-01-01
+2026-03-28 20:14:11,590 | INFO | Loaded 100 scalers from models/lstm/scalers
+2026-03-28 20:14:11,590 | INFO | Preprocessor: transform started
+2026-03-28 20:14:11,842 | INFO | Preprocessor: transform complete
+2026-03-28 20:14:11,842 | INFO | FeatureEngineer: building features...
+2026-03-28 20:14:11,883 | INFO |   ✓ Lag features added (lag_1, lag_7)
+2026-03-28 20:14:11,942 | INFO |   ✓ Rolling statistics added (mean_7, std_7)
+2026-03-28 20:14:11,948 | INFO |   ✓ Time features added (day_of_week sin/cos, month sin/cos)
+2026-03-28 20:14:11,962 | INFO |   ✓ Categorical encoding: 17 columns created
+2026-03-28 20:14:11,968 | INFO |   ✓ Dropped 700 NaN rows (from lag/rolling at series start)
+2026-03-28 20:14:11,968 | INFO | FeatureEngineer: complete. Shape: (72400, 38) | Numeric features: 12 | Categorical features: 17
+2026-03-28 20:14:11,974 | INFO | Found 100 unique store-product pairs.
+2026-03-28 20:14:11,974 | INFO | Training on: S001 / P0001
+2026-03-28 20:14:11,978 | INFO | Loading TFT predictor...
+2026-03-28 20:14:12,195 | INFO | TFTPredictor loaded from models/lstm/tft/best_tft_model.pt | horizon=7 | input_size=30 | device=cuda
+2026-03-28 20:14:12,196 | INFO | RollingForecastWindow: seq_len=30n_features=30
+2026-03-28 20:14:12,196 | INFO | ForecastStateBridge initialised | seq_len=30, n_features=30, horizon=7, inverse_transform=yes
+2026-03-28 20:14:12,196 | INFO | Building inventory environment...
+2026-03-28 20:14:12,197 | INFO | DemandSimulator: mode=replay, mean=137.86, std=108.39, n_days=724
+2026-03-28 20:14:12,197 | INFO | ActionSpace: 17 actions, deltas from -200 to 200 in steps of 25, lead time 2 days, max inventory 500
+2026-03-28 20:14:12,197 | INFO | StateSpace: dim45[inventory(2) + pipeline(2)] +[history(30)] +[forecast(7)] +[numeric(4)] +[categorical(0)]
+2026-03-28 20:14:12,197 | INFO | InventoryEnv Created |obs_dim=45 | n_actions=17 | use_forecast=True
+2026-03-28 20:14:12,197 | INFO | Building DQN agent...
+2026-03-28 20:14:12,197 | INFO | QNetwork: state_dim=45 → [256×2] → n_actions=17 | params=81,937
+2026-03-28 20:14:12,198 | INFO | QNetwork: state_dim=45 → [256×2] → n_actions=17 | params=81,937
+2026-03-28 20:14:13,237 | INFO | ReplayBuffer: capacity=50,000, state_dim=45, memory≈18.0MB
+2026-03-28 20:14:13,237 | INFO | DQNAgent: state_dim=45, n_actions=17, device=cuda, gamma=0.99, epsilon=1.0→0.01
+2026-03-28 20:14:13,239 | INFO | Starting training for 200,000 timesteps...
+2026-03-28 20:14:17,617 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,618 | INFO | New best avg reward: -42624.97 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,756 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,756 | INFO | New best avg reward: -42597.02 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,835 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,835 | INFO | New best avg reward: -42551.84 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,908 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,908 | INFO | New best avg reward: -42387.43 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,981 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:17,981 | INFO | New best avg reward: -42230.12 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,054 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,054 | INFO | New best avg reward: -41957.76 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,126 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,126 | INFO | New best avg reward: -41653.09 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,198 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,198 | INFO | New best avg reward: -41344.26 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,270 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,270 | INFO | New best avg reward: -41216.31 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,341 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,341 | INFO | New best avg reward: -41136.70 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,411 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,411 | INFO | New best avg reward: -40875.33 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,481 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,481 | INFO | New best avg reward: -40714.43 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,552 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,552 | INFO | New best avg reward: -40529.34 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,623 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,623 | INFO | New best avg reward: -40242.07 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,694 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,694 | INFO | New best avg reward: -39842.65 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,769 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,769 | INFO | New best avg reward: -39499.68 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,839 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,839 | INFO | New best avg reward: -39027.45 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,911 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,911 | INFO | New best avg reward: -38811.58 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,982 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:18,982 | INFO | New best avg reward: -38531.30 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,052 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,052 | INFO | New best avg reward: -38187.47 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,123 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,123 | INFO | New best avg reward: -37931.89 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,194 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,194 | INFO | New best avg reward: -37720.36 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,265 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,265 | INFO | New best avg reward: -37436.57 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,333 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,333 | INFO | New best avg reward: -37042.48 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,404 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,404 | INFO | New best avg reward: -36721.13 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,474 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,474 | INFO | New best avg reward: -36353.57 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,544 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,544 | INFO | New best avg reward: -36049.33 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,617 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,617 | INFO | New best avg reward: -35778.11 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,688 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,688 | INFO | New best avg reward: -35442.36 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,760 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,760 | INFO | New best avg reward: -35036.55 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,830 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,831 | INFO | New best avg reward: -34745.61 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,901 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,901 | INFO | New best avg reward: -34398.84 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,973 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:19,973 | INFO | New best avg reward: -33987.72 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,079 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,079 | INFO | New best avg reward: -33582.05 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,150 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,150 | INFO | New best avg reward: -33264.32 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,221 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,221 | INFO | New best avg reward: -32992.16 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,293 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,293 | INFO | New best avg reward: -32458.95 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,365 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,365 | INFO | New best avg reward: -32137.97 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,435 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,435 | INFO | New best avg reward: -31799.35 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,505 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,505 | INFO | New best avg reward: -31408.18 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,577 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,577 | INFO | New best avg reward: -31177.73 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,646 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,646 | INFO | New best avg reward: -30991.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,720 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,720 | INFO | New best avg reward: -30627.78 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,791 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,791 | INFO | New best avg reward: -30218.18 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,862 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,862 | INFO | New best avg reward: -29883.47 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,933 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:20,933 | INFO | New best avg reward: -29615.06 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,005 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,005 | INFO | New best avg reward: -29125.88 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,075 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,075 | INFO | New best avg reward: -28741.94 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,147 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,147 | INFO | New best avg reward: -28294.74 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,213 | INFO | Episode   100 | Avg Reward (last 50): -27943.41 | Avg Length: 30 | Total Steps: 3,000, epsilon=0.0100
+2026-03-28 20:14:21,221 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,221 | INFO | New best avg reward: -27943.41 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,291 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,291 | INFO | New best avg reward: -27699.74 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,362 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,362 | INFO | New best avg reward: -27602.61 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,433 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,434 | INFO | New best avg reward: -27532.40 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,504 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,504 | INFO | New best avg reward: -27519.69 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,638 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,638 | INFO | New best avg reward: -27512.34 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,836 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,836 | INFO | New best avg reward: -27480.52 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,906 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,906 | INFO | New best avg reward: -27477.27 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,977 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:21,977 | INFO | New best avg reward: -27466.99 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,049 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,049 | INFO | New best avg reward: -27458.46 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,119 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,119 | INFO | New best avg reward: -27455.48 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,190 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,190 | INFO | New best avg reward: -27452.54 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,261 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,261 | INFO | New best avg reward: -27449.89 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,332 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,332 | INFO | New best avg reward: -27433.71 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,403 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,403 | INFO | New best avg reward: -27424.52 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,474 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,474 | INFO | New best avg reward: -27424.12 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,547 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,547 | INFO | New best avg reward: -27411.34 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,616 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,616 | INFO | New best avg reward: -27378.48 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,687 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,687 | INFO | New best avg reward: -27375.82 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,821 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,821 | INFO | New best avg reward: -27370.48 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,892 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,892 | INFO | New best avg reward: -27357.03 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,962 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:22,963 | INFO | New best avg reward: -27349.96 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,033 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,033 | INFO | New best avg reward: -27310.13 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,104 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,104 | INFO | New best avg reward: -27297.57 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,174 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,174 | INFO | New best avg reward: -27247.44 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,245 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,245 | INFO | New best avg reward: -27226.02 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,380 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,380 | INFO | New best avg reward: -27200.04 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,450 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,450 | INFO | New best avg reward: -27168.21 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,522 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,522 | INFO | New best avg reward: -27113.24 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,594 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,594 | INFO | New best avg reward: -27070.21 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,665 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,665 | INFO | New best avg reward: -27011.22 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,735 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,735 | INFO | New best avg reward: -26989.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,874 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:23,874 | INFO | New best avg reward: -26979.21 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,008 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,008 | INFO | New best avg reward: -26954.97 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,079 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,079 | INFO | New best avg reward: -26952.60 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,149 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,149 | INFO | New best avg reward: -26947.69 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,219 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,220 | INFO | New best avg reward: -26837.32 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,290 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,290 | INFO | New best avg reward: -26815.55 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,424 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,424 | INFO | New best avg reward: -26797.96 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,494 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,494 | INFO | New best avg reward: -26782.22 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,565 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,565 | INFO | New best avg reward: -26761.72 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,636 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,636 | INFO | New best avg reward: -26729.97 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,707 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,707 | INFO | New best avg reward: -26707.09 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,841 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,841 | INFO | New best avg reward: -26699.49 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,912 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,912 | INFO | New best avg reward: -26680.05 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,982 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:24,982 | INFO | New best avg reward: -26658.06 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,053 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,053 | INFO | New best avg reward: -26644.58 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,189 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,189 | INFO | New best avg reward: -26621.27 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,260 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,260 | INFO | New best avg reward: -26610.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,331 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,331 | INFO | New best avg reward: -26603.08 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,402 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,402 | INFO | New best avg reward: -26592.69 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,473 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,473 | INFO | New best avg reward: -26581.26 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,543 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,543 | INFO | New best avg reward: -26576.88 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,614 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,614 | INFO | New best avg reward: -26566.52 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,684 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,684 | INFO | New best avg reward: -26555.25 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,755 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,755 | INFO | New best avg reward: -26547.33 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,826 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,826 | INFO | New best avg reward: -26542.84 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,960 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:25,960 | INFO | New best avg reward: -26539.34 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,033 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,033 | INFO | New best avg reward: -26530.73 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,106 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,106 | INFO | New best avg reward: -26523.40 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,240 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,240 | INFO | New best avg reward: -26491.60 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,384 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,384 | INFO | New best avg reward: -26485.03 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,456 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,456 | INFO | New best avg reward: -26460.64 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,527 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,527 | INFO | New best avg reward: -26447.85 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,598 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,599 | INFO | New best avg reward: -26408.59 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,795 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,795 | INFO | New best avg reward: -26391.32 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,866 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:26,866 | INFO | New best avg reward: -26378.25 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:27,064 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:27,064 | INFO | New best avg reward: -26373.14 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:27,262 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:27,262 | INFO | New best avg reward: -26367.36 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:28,094 | INFO | Episode   200 | Avg Reward (last 50): -26522.29 | Avg Length: 30 | Total Steps: 6,000, epsilon=0.0100
+2026-03-28 20:14:31,106 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,106 | INFO | New best avg reward: -26351.65 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,176 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,176 | INFO | New best avg reward: -26329.90 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,313 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,313 | INFO | New best avg reward: -26294.15 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,383 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,383 | INFO | New best avg reward: -26292.15 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,518 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,518 | INFO | New best avg reward: -26288.76 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,717 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,717 | INFO | New best avg reward: -26261.60 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,853 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:31,853 | INFO | New best avg reward: -26222.22 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,243 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,243 | INFO | New best avg reward: -26206.28 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,313 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,313 | INFO | New best avg reward: -26205.94 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,640 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,640 | INFO | New best avg reward: -26197.31 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,710 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,710 | INFO | New best avg reward: -26191.16 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,782 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,782 | INFO | New best avg reward: -26190.30 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,852 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:32,852 | INFO | New best avg reward: -26185.71 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,050 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,050 | INFO | New best avg reward: -26165.01 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,185 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,185 | INFO | New best avg reward: -26157.82 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,255 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,255 | INFO | New best avg reward: -26149.72 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,327 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,327 | INFO | New best avg reward: -26147.27 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,397 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,397 | INFO | New best avg reward: -26129.05 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,468 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,468 | INFO | New best avg reward: -26122.68 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,538 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,538 | INFO | New best avg reward: -26115.53 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,610 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,610 | INFO | New best avg reward: -26102.05 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,682 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,682 | INFO | New best avg reward: -26094.41 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,881 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,881 | INFO | New best avg reward: -26065.41 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,966 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:33,966 | INFO | New best avg reward: -26063.16 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:34,667 | INFO | Episode   300 | Avg Reward (last 50): -26089.97 | Avg Length: 30 | Total Steps: 9,000, epsilon=0.0100
+2026-03-28 20:14:34,931 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:34,931 | INFO | New best avg reward: -26052.32 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:35,002 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:35,002 | INFO | New best avg reward: -26045.99 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:35,835 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:35,835 | INFO | New best avg reward: -26043.32 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,647 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,647 | INFO | New best avg reward: -26033.23 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,720 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,720 | INFO | New best avg reward: -26033.22 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,792 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,792 | INFO | New best avg reward: -26033.11 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,863 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,863 | INFO | New best avg reward: -26032.78 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,935 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:39,935 | INFO | New best avg reward: -26028.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:40,006 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:40,006 | INFO | New best avg reward: -26018.24 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:41,110 | INFO | Episode   400 | Avg Reward (last 50): -26103.60 | Avg Length: 30 | Total Steps: 12,000, epsilon=0.0100
+2026-03-28 20:14:46,016 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:46,016 | INFO | New best avg reward: -26016.91 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:14:47,644 | INFO | Episode   500 | Avg Reward (last 50): -26126.52 | Avg Length: 30 | Total Steps: 15,000, epsilon=0.0100
+2026-03-28 20:14:47,656 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep500.pt
+2026-03-28 20:14:54,057 | INFO | Episode   600 | Avg Reward (last 50): -26163.65 | Avg Length: 30 | Total Steps: 18,000, epsilon=0.0100
+2026-03-28 20:15:00,426 | INFO | Episode   700 | Avg Reward (last 50): -26355.88 | Avg Length: 30 | Total Steps: 21,000, epsilon=0.0100
+2026-03-28 20:15:06,794 | INFO | Episode   800 | Avg Reward (last 50): -26258.17 | Avg Length: 30 | Total Steps: 24,000, epsilon=0.0100
+2026-03-28 20:15:13,328 | INFO | Episode   900 | Avg Reward (last 50): -26263.02 | Avg Length: 30 | Total Steps: 27,000, epsilon=0.0100
+2026-03-28 20:15:19,739 | INFO | Episode  1000 | Avg Reward (last 50): -26055.26 | Avg Length: 30 | Total Steps: 30,000, epsilon=0.0100
+2026-03-28 20:15:19,748 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep1000.pt
+2026-03-28 20:15:19,820 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:19,820 | INFO | New best avg reward: -26009.64 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:23,968 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:23,968 | INFO | New best avg reward: -25988.12 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:24,739 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:24,739 | INFO | New best avg reward: -25966.74 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,003 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,003 | INFO | New best avg reward: -25963.84 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,074 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,074 | INFO | New best avg reward: -25934.29 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,273 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:25,273 | INFO | New best avg reward: -25904.92 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:26,163 | INFO | Episode  1100 | Avg Reward (last 50): -26040.46 | Avg Length: 30 | Total Steps: 33,000, epsilon=0.0100
+2026-03-28 20:15:30,057 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,057 | INFO | New best avg reward: -25891.72 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,128 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,128 | INFO | New best avg reward: -25878.03 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,326 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,326 | INFO | New best avg reward: -25866.46 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,461 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,461 | INFO | New best avg reward: -25853.12 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,598 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,598 | INFO | New best avg reward: -25845.14 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,671 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,671 | INFO | New best avg reward: -25841.62 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,806 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,806 | INFO | New best avg reward: -25811.54 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,877 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:30,877 | INFO | New best avg reward: -25808.74 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:32,597 | INFO | Episode  1200 | Avg Reward (last 50): -25938.32 | Avg Length: 30 | Total Steps: 36,000, epsilon=0.0100
+2026-03-28 20:15:38,975 | INFO | Episode  1300 | Avg Reward (last 50): -25900.17 | Avg Length: 30 | Total Steps: 39,000, epsilon=0.0100
+2026-03-28 20:15:42,886 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:42,886 | INFO | New best avg reward: -25804.23 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:43,085 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:43,086 | INFO | New best avg reward: -25782.89 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:43,412 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:43,412 | INFO | New best avg reward: -25782.09 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:45,025 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:45,025 | INFO | New best avg reward: -25778.00 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:45,409 | INFO | Episode  1400 | Avg Reward (last 50): -25829.08 | Avg Length: 30 | Total Steps: 42,000, epsilon=0.0100
+2026-03-28 20:15:47,182 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:47,183 | INFO | New best avg reward: -25773.14 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:47,320 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:47,320 | INFO | New best avg reward: -25772.94 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:47,583 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:47,583 | INFO | New best avg reward: -25755.96 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:48,359 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:48,359 | INFO | New best avg reward: -25752.60 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:51,879 | INFO | Episode  1500 | Avg Reward (last 50): -25801.00 | Avg Length: 30 | Total Steps: 45,000, epsilon=0.0100
+2026-03-28 20:15:51,890 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep1500.pt
+2026-03-28 20:15:55,873 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:55,874 | INFO | New best avg reward: -25749.18 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:55,946 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:55,946 | INFO | New best avg reward: -25743.49 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,020 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,020 | INFO | New best avg reward: -25742.21 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,224 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,224 | INFO | New best avg reward: -25742.18 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,296 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,296 | INFO | New best avg reward: -25714.48 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,368 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:56,368 | INFO | New best avg reward: -25713.80 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,143 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,143 | INFO | New best avg reward: -25702.22 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,407 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,407 | INFO | New best avg reward: -25686.66 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,546 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:57,546 | INFO | New best avg reward: -25684.20 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:15:58,379 | INFO | Episode  1600 | Avg Reward (last 50): -25752.29 | Avg Length: 30 | Total Steps: 48,000, epsilon=0.0100
+2026-03-28 20:16:04,776 | INFO | Episode  1700 | Avg Reward (last 50): -25834.67 | Avg Length: 30 | Total Steps: 51,000, epsilon=0.0100
+2026-03-28 20:16:11,166 | INFO | Episode  1800 | Avg Reward (last 50): -25891.59 | Avg Length: 30 | Total Steps: 54,000, epsilon=0.0100
+2026-03-28 20:16:17,567 | INFO | Episode  1900 | Avg Reward (last 50): -25857.53 | Avg Length: 30 | Total Steps: 57,000, epsilon=0.0100
+2026-03-28 20:16:24,018 | INFO | Episode  2000 | Avg Reward (last 50): -25803.21 | Avg Length: 30 | Total Steps: 60,000, epsilon=0.0100
+2026-03-28 20:16:24,031 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep2000.pt
+2026-03-28 20:16:30,407 | INFO | Episode  2100 | Avg Reward (last 50): -25895.87 | Avg Length: 30 | Total Steps: 63,000, epsilon=0.0100
+2026-03-28 20:16:36,797 | INFO | Episode  2200 | Avg Reward (last 50): -26458.80 | Avg Length: 30 | Total Steps: 66,000, epsilon=0.0100
+2026-03-28 20:16:43,186 | INFO | Episode  2300 | Avg Reward (last 50): -26108.13 | Avg Length: 30 | Total Steps: 69,000, epsilon=0.0100
+2026-03-28 20:16:49,659 | INFO | Episode  2400 | Avg Reward (last 50): -25954.16 | Avg Length: 30 | Total Steps: 72,000, epsilon=0.0100
+2026-03-28 20:16:56,225 | INFO | Episode  2500 | Avg Reward (last 50): -26861.95 | Avg Length: 30 | Total Steps: 75,000, epsilon=0.0100
+2026-03-28 20:16:56,233 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep2500.pt
+2026-03-28 20:17:02,800 | INFO | Episode  2600 | Avg Reward (last 50): -25796.84 | Avg Length: 30 | Total Steps: 78,000, epsilon=0.0100
+2026-03-28 20:17:03,536 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:03,536 | INFO | New best avg reward: -25661.46 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:03,873 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:03,874 | INFO | New best avg reward: -25659.62 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:09,398 | INFO | Episode  2700 | Avg Reward (last 50): -25840.49 | Avg Length: 30 | Total Steps: 81,000, epsilon=0.0100
+2026-03-28 20:17:13,680 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,680 | INFO | New best avg reward: -25650.37 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,756 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,756 | INFO | New best avg reward: -25644.09 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,828 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,828 | INFO | New best avg reward: -25643.56 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,901 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:13,901 | INFO | New best avg reward: -25642.17 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:15,950 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:15,950 | INFO | New best avg reward: -25609.13 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:16,016 | INFO | Episode  2800 | Avg Reward (last 50): -25608.68 | Avg Length: 30 | Total Steps: 84,000, epsilon=0.0100
+2026-03-28 20:17:16,022 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:16,022 | INFO | New best avg reward: -25608.68 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:17,282 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:17,282 | INFO | New best avg reward: -25596.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:22,501 | INFO | Episode  2900 | Avg Reward (last 50): -25686.80 | Avg Length: 30 | Total Steps: 87,000, epsilon=0.0100
+2026-03-28 20:17:24,561 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,561 | INFO | New best avg reward: -25593.11 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,631 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,631 | INFO | New best avg reward: -25592.50 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,765 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,765 | INFO | New best avg reward: -25575.67 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,901 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:24,901 | INFO | New best avg reward: -25569.94 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,409 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,409 | INFO | New best avg reward: -25569.58 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,481 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,481 | INFO | New best avg reward: -25562.00 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,553 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,553 | INFO | New best avg reward: -25558.39 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,622 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,622 | INFO | New best avg reward: -25557.98 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,694 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,694 | INFO | New best avg reward: -25540.13 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,764 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,764 | INFO | New best avg reward: -25537.87 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,835 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,835 | INFO | New best avg reward: -25533.43 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,908 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,908 | INFO | New best avg reward: -25532.77 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,979 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:27,979 | INFO | New best avg reward: -25491.07 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,050 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,050 | INFO | New best avg reward: -25481.36 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,185 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,185 | INFO | New best avg reward: -25480.57 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,254 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,254 | INFO | New best avg reward: -25456.47 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,390 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,391 | INFO | New best avg reward: -25456.27 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,589 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,589 | INFO | New best avg reward: -25456.13 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,724 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,724 | INFO | New best avg reward: -25435.97 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,795 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:28,795 | INFO | New best avg reward: -25433.92 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,052 | INFO | Episode  3000 | Avg Reward (last 50): -25442.24 | Avg Length: 30 | Total Steps: 90,000, epsilon=0.0100
+2026-03-28 20:17:29,059 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep3000.pt
+2026-03-28 20:17:29,514 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,514 | INFO | New best avg reward: -25413.88 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,649 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,649 | INFO | New best avg reward: -25413.33 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,720 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:29,720 | INFO | New best avg reward: -25399.16 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,112 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,112 | INFO | New best avg reward: -25398.38 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,184 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,184 | INFO | New best avg reward: -25395.18 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,255 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,255 | INFO | New best avg reward: -25394.21 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,327 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,327 | INFO | New best avg reward: -25389.25 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,398 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,399 | INFO | New best avg reward: -25387.54 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,470 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:30,470 | INFO | New best avg reward: -25387.28 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:17:35,526 | INFO | Episode  3100 | Avg Reward (last 50): -25525.27 | Avg Length: 30 | Total Steps: 93,000, epsilon=0.0100
+2026-03-28 20:17:41,924 | INFO | Episode  3200 | Avg Reward (last 50): -25489.16 | Avg Length: 30 | Total Steps: 96,000, epsilon=0.0100
+2026-03-28 20:17:48,322 | INFO | Episode  3300 | Avg Reward (last 50): -25656.49 | Avg Length: 30 | Total Steps: 99,000, epsilon=0.0100
+2026-03-28 20:17:54,882 | INFO | Episode  3400 | Avg Reward (last 50): -25582.07 | Avg Length: 30 | Total Steps: 102,000, epsilon=0.0100
+2026-03-28 20:18:01,455 | INFO | Episode  3500 | Avg Reward (last 50): -25522.40 | Avg Length: 30 | Total Steps: 105,000, epsilon=0.0100
+2026-03-28 20:18:01,467 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep3500.pt
+2026-03-28 20:18:08,033 | INFO | Episode  3600 | Avg Reward (last 50): -25599.83 | Avg Length: 30 | Total Steps: 108,000, epsilon=0.0100
+2026-03-28 20:18:14,607 | INFO | Episode  3700 | Avg Reward (last 50): -25659.92 | Avg Length: 30 | Total Steps: 111,000, epsilon=0.0100
+2026-03-28 20:18:21,174 | INFO | Episode  3800 | Avg Reward (last 50): -25799.46 | Avg Length: 30 | Total Steps: 114,000, epsilon=0.0100
+2026-03-28 20:18:27,628 | INFO | Episode  3900 | Avg Reward (last 50): -25536.00 | Avg Length: 30 | Total Steps: 117,000, epsilon=0.0100
+2026-03-28 20:18:34,018 | INFO | Episode  4000 | Avg Reward (last 50): -25506.46 | Avg Length: 30 | Total Steps: 120,000, epsilon=0.0100
+2026-03-28 20:18:34,059 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep4000.pt
+2026-03-28 20:18:40,458 | INFO | Episode  4100 | Avg Reward (last 50): -25552.51 | Avg Length: 30 | Total Steps: 123,000, epsilon=0.0100
+2026-03-28 20:18:46,859 | INFO | Episode  4200 | Avg Reward (last 50): -25630.98 | Avg Length: 30 | Total Steps: 126,000, epsilon=0.0100
+2026-03-28 20:18:53,255 | INFO | Episode  4300 | Avg Reward (last 50): -25498.87 | Avg Length: 30 | Total Steps: 129,000, epsilon=0.0100
+2026-03-28 20:18:59,655 | INFO | Episode  4400 | Avg Reward (last 50): -25486.56 | Avg Length: 30 | Total Steps: 132,000, epsilon=0.0100
+2026-03-28 20:19:06,052 | INFO | Episode  4500 | Avg Reward (last 50): -25483.01 | Avg Length: 30 | Total Steps: 135,000, epsilon=0.0100
+2026-03-28 20:19:06,065 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep4500.pt
+2026-03-28 20:19:12,461 | INFO | Episode  4600 | Avg Reward (last 50): -25452.06 | Avg Length: 30 | Total Steps: 138,000, epsilon=0.0100
+2026-03-28 20:19:18,816 | INFO | Episode  4700 | Avg Reward (last 50): -25496.86 | Avg Length: 30 | Total Steps: 141,000, epsilon=0.0100
+2026-03-28 20:19:25,196 | INFO | Episode  4800 | Avg Reward (last 50): -25531.33 | Avg Length: 30 | Total Steps: 144,000, epsilon=0.0100
+2026-03-28 20:19:31,592 | INFO | Episode  4900 | Avg Reward (last 50): -25560.09 | Avg Length: 30 | Total Steps: 147,000, epsilon=0.0100
+2026-03-28 20:19:38,063 | INFO | Episode  5000 | Avg Reward (last 50): -25596.42 | Avg Length: 30 | Total Steps: 150,000, epsilon=0.0100
+2026-03-28 20:19:38,075 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep5000.pt
+2026-03-28 20:19:44,646 | INFO | Episode  5100 | Avg Reward (last 50): -25446.25 | Avg Length: 30 | Total Steps: 153,000, epsilon=0.0100
+2026-03-28 20:19:51,212 | INFO | Episode  5200 | Avg Reward (last 50): -25584.93 | Avg Length: 30 | Total Steps: 156,000, epsilon=0.0100
+2026-03-28 20:19:57,788 | INFO | Episode  5300 | Avg Reward (last 50): -25576.88 | Avg Length: 30 | Total Steps: 159,000, epsilon=0.0100
+2026-03-28 20:20:04,362 | INFO | Episode  5400 | Avg Reward (last 50): -25693.41 | Avg Length: 30 | Total Steps: 162,000, epsilon=0.0100
+2026-03-28 20:20:10,929 | INFO | Episode  5500 | Avg Reward (last 50): -25475.61 | Avg Length: 30 | Total Steps: 165,000, epsilon=0.0100
+2026-03-28 20:20:10,974 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep5500.pt
+2026-03-28 20:20:17,547 | INFO | Episode  5600 | Avg Reward (last 50): -25462.83 | Avg Length: 30 | Total Steps: 168,000, epsilon=0.0100
+2026-03-28 20:20:24,113 | INFO | Episode  5700 | Avg Reward (last 50): -25620.31 | Avg Length: 30 | Total Steps: 171,000, epsilon=0.0100
+2026-03-28 20:20:26,175 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,176 | INFO | New best avg reward: -25372.99 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,247 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,247 | INFO | New best avg reward: -25371.85 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,320 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,320 | INFO | New best avg reward: -25370.56 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,393 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:26,393 | INFO | New best avg reward: -25369.80 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:20:30,702 | INFO | Episode  5800 | Avg Reward (last 50): -25499.39 | Avg Length: 30 | Total Steps: 174,000, epsilon=0.0100
+2026-03-28 20:20:37,049 | INFO | Episode  5900 | Avg Reward (last 50): -25480.99 | Avg Length: 30 | Total Steps: 177,000, epsilon=0.0100
+2026-03-28 20:20:43,396 | INFO | Episode  6000 | Avg Reward (last 50): -25400.78 | Avg Length: 30 | Total Steps: 180,000, epsilon=0.0100
+2026-03-28 20:20:43,411 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep6000.pt
+2026-03-28 20:20:49,763 | INFO | Episode  6100 | Avg Reward (last 50): -25402.70 | Avg Length: 30 | Total Steps: 183,000, epsilon=0.0100
+2026-03-28 20:20:56,109 | INFO | Episode  6200 | Avg Reward (last 50): -25509.30 | Avg Length: 30 | Total Steps: 186,000, epsilon=0.0100
+2026-03-28 20:21:02,457 | INFO | Episode  6300 | Avg Reward (last 50): -25565.53 | Avg Length: 30 | Total Steps: 189,000, epsilon=0.0100
+2026-03-28 20:21:08,808 | INFO | Episode  6400 | Avg Reward (last 50): -25601.47 | Avg Length: 30 | Total Steps: 192,000, epsilon=0.0100
+2026-03-28 20:21:15,161 | INFO | Episode  6500 | Avg Reward (last 50): -25389.57 | Avg Length: 30 | Total Steps: 195,000, epsilon=0.0100
+2026-03-28 20:21:15,170 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_ep6500.pt
+2026-03-28 20:21:21,534 | INFO | Episode  6600 | Avg Reward (last 50): -25459.65 | Avg Length: 30 | Total Steps: 198,000, epsilon=0.0100
+2026-03-28 20:21:25,903 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:21:25,903 | INFO | New best avg reward: -25324.27 → saved to models/rl/tft_rl_agent/tft_rl_agent_best.pt
+2026-03-28 20:21:25,910 | INFO | DQNAgent saved to models/rl/tft_rl_agent/tft_rl_agent_final.pt
+2026-03-28 20:21:25,910 | INFO | Training complete. Final agent saved to models/rl/tft_rl_agent/tft_rl_agent_final.pt
+2026-03-28 20:21:25,920 | INFO | Training history saved to outputs/results/tft_rl_training_history.json
+2026-03-28 20:21:25,920 | INFO | 
+--- Training Complete ---
+2026-03-28 20:21:25,920 | INFO | Episodes completed:  6667
+2026-03-28 20:21:25,920 | INFO | Total steps:         200,000
+2026-03-28 20:21:25,920 | INFO | Agent saved to:      models/rl/tft_rl_agent/tft_rl_agent_final.pt
+2026-03-28 20:21:25,920 | INFO | Final avg reward (last 50 episodes): -25324.27
